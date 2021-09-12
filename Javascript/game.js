@@ -3,6 +3,7 @@ const choices = Array.from(document.querySelectorAll(".choice-text"));
 const progressText = document.querySelector("#progressText");
 const scoreText = document.querySelector("#score");
 const progressBarFull = document.querySelector("#progressBarFull");
+const levelText = document.querySelector("#level");
 
 let currentQuestion = {};
 let acceptingAnswers = true;
@@ -245,8 +246,12 @@ const MAX_QUESTIONS = 25;
 startGame = () => {
   questionCounter = 0;
   score = 0;
-  availableQuestions = [...questions];
+  levelUp();
   getNewQuestion();
+};
+
+levelUp = () => {
+  availableQuestions = questions.filter(question => question.level === countLevel);
 };
 
 giveUp = () => {
@@ -256,10 +261,8 @@ giveUp = () => {
 
 
 getNewQuestion = () => {
-
-  if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+  if (questionCounter > MAX_QUESTIONS) {
     localStorage.setItem("mostRecentScore", score);
-
     return window.location.assign("/end.html");
   }
 
@@ -275,7 +278,7 @@ getNewQuestion = () => {
     const number = choice.dataset["number"];
     choice.innerText = currentQuestion["choice" + number];
   });
-
+  
   availableQuestions.splice(questionsIndex, 1);
 
   acceptingAnswers = true;
@@ -301,11 +304,16 @@ choices.forEach((choice) => {
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
-      countLevel++;
     }, 1000);
 
     if (classToApply === "incorrect") {
       return window.location.assign("/lose.html");
+    }
+
+    if (availableQuestions.length === 0 ) {
+      countLevel ++;
+      levelUp();
+      incrementLevel();
     }
   });
 });
@@ -313,6 +321,25 @@ choices.forEach((choice) => {
 incrementScore = (num) => {
   score += num;
   scoreText.innerText = score;
+};
+
+incrementLevel = () => {
+  switch (countLevel) {
+    case 2:
+      levelText.innerText = "Cultura General";
+      break;
+    case 3:
+      levelText.innerText = "Geografia e historia";
+      break;
+    case 4:
+      levelText.innerText = "Arte y cultura";
+      break;
+    case 5:
+      levelText.innerText = "Ciencia";
+      break;
+    default:
+      break;
+  }
 };
 
 startGame();
