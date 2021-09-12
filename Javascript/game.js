@@ -261,7 +261,7 @@ giveUp = () => {
 
 
 getNewQuestion = () => {
-  if (questionCounter > MAX_QUESTIONS) {
+  if (questionCounter > MAX_QUESTIONS || countLevel === 6) {
     localStorage.setItem("mostRecentScore", score);
     return window.location.assign("/end.html");
   }
