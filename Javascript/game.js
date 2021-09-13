@@ -326,16 +326,16 @@ incrementScore = (num) => {
 incrementLevel = () => {
   switch (countLevel) {
     case 2:
-      levelText.innerText = "LV2. Cultura General";
+      levelText.innerText = "Lv2. Cultura General";
       break;
     case 3:
-      levelText.innerText = "LV3. Geografia e historia";
+      levelText.innerText = "Lv3. Geografia e historia";
       break;
     case 4:
-      levelText.innerText = "LV4. Arte y cultura";
+      levelText.innerText = "Lv4. Arte y cultura";
       break;
     case 5:
-      levelText.innerText = "LV5. Ciencia";
+      levelText.innerText = "Lv5. Ciencia";
       break;
     default:
       break;
