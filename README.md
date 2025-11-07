@@ -3,7 +3,6 @@
 Aplicación de quiz interactivo construida con React, Vite, Tailwind CSS y Bun, lista para desplegarse gratis en GitHub Pages. Incluye preguntas curadas de desarrollo web, rachas con bonus, historial detallado y un ranking persistido en `localStorage`.
 
 ## Características principales
-
 - ⚛️ Componentes reutilizables con hooks personalizados (`useQuizEngine`, `useHighscores`).
 - 🎯 Más de 30 preguntas categorizadas por dificultad (HTML, CSS, JS, React, DevOps, etc.).
 - 📈 Sistema de puntuación con bonus por racha, precisión y resumen detallado luego de cada partida.
