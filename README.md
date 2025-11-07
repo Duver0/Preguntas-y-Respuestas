@@ -1,2 +1,66 @@
-# Preguntas-y-Respuestas
-Reto 1, 25 preguntas aleatorias con 4 opciones de respuesta y bonificaciones por respuesta correcta
+# Preguntas y Respuestas · React + Tailwind
+
+Aplicación de quiz interactivo construida con React, Vite, Tailwind CSS y Bun, lista para desplegarse gratis en GitHub Pages. Incluye preguntas curadas de desarrollo web, rachas con bonus, historial detallado y un ranking persistido en `localStorage`.
+
+## Características principales
+
+- ⚛️ Componentes reutilizables con hooks personalizados (`useQuizEngine`, `useHighscores`).
+- 🎯 Más de 30 preguntas categorizadas por dificultad (HTML, CSS, JS, React, DevOps, etc.).
+- 📈 Sistema de puntuación con bonus por racha, precisión y resumen detallado luego de cada partida.
+- 🛡️ Al fallar ves un banner con la explicación y puedes elegir entre volver al menú o reiniciar al instante.
+- 🏆 Tablero de récords local con opción para limpiarlo.
+- 🎨 UI responsiva con Tailwind CSS y gradientes optimizados para móviles y desktop.
+- 🚀 Configuración de Vite lista para GitHub Pages (`base` apuntando al nombre del repo).
+
+## Requisitos
+
+- [Bun](https://bun.sh/) ≥ 1.2
+
+## Scripts disponibles
+
+```bash
+# Instala dependencias
+bun install
+
+# Servidor de desarrollo
+bun run dev
+
+# Linter de TypeScript
+bun run lint
+
+# Build optimizado (necesario antes de publicar)
+bun run build
+
+# Previsualizar el build
+bun run preview
+```
+
+## Estructura del proyecto
+
+```
+├─ src/
+│  ├─ App.tsx              # Layout principal y orquestación del quiz
+│  ├─ components/          # UI modular: Hero, ScoreCard, QuestionCard, etc.
+│  ├─ data/questions.ts    # Banco de preguntas (puedes agregar o editar aquí)
+│  ├─ hooks/               # Lógica reutilizable: engine y highscores
+│  └─ index.css            # Entrada de estilos (incluye Tailwind)
+├─ index.html              # Entrada Vite (compatible con GitHub Pages)
+├─ tailwind.config.js
+├─ vite.config.ts          # Base configurada a /Preguntas-y-Respuestas/
+└─ package.json
+```
+
+## Personalización
+
+1. Añade o modifica preguntas editando `src/data/questions.ts`. Cada pregunta acepta categoría, dificultad y explicación para reforzar el aprendizaje.
+2. Ajusta los parámetros del hook (`rounds`, `basePoints`, `streakBonus`) en `src/App.tsx`.
+3. Cambia la paleta de color en `tailwind.config.js` dentro de `theme.extend.colors.brand`.
+
+## Despliegue en GitHub Pages
+
+1. Ejecuta `bun run build` para generar la carpeta `dist/`.
+2. Sube el contenido de `dist/` a la rama `gh-pages` o usa un flujo de GitHub Actions (por ejemplo, `peaceiris/actions-gh-pages`).
+3. En la configuración del repositorio, activa GitHub Pages apuntando a la rama `gh-pages` (carpeta raíz).
+4. Gracias al `base` configurado en `vite.config.ts`, los assets se servirán desde `https://<usuario>.github.io/Preguntas-y-Respuestas/`.
+
+¡Listo! Ya tienes un quiz moderno, optimizado y gratuito para compartir tus conocimientos.
