@@ -57,9 +57,10 @@ bun run preview
 
 ## Despliegue en GitHub Pages
 
-1. Ejecuta `bun run build` para generar la carpeta `dist/`.
-2. Sube el contenido de `dist/` a la rama `gh-pages` o usa un flujo de GitHub Actions (por ejemplo, `peaceiris/actions-gh-pages`).
-3. En la configuración del repositorio, activa GitHub Pages apuntando a la rama `gh-pages` (carpeta raíz).
-4. Gracias al `base` configurado en `vite.config.ts`, los assets se servirán desde `https://<usuario>.github.io/Preguntas-y-Respuestas/`.
+Este repositorio incluye un workflow (`.github/workflows/deploy.yml`) que construye el sitio con Bun y publica automáticamente el contenido optimizado en GitHub Pages.
 
-¡Listo! Ya tienes un quiz moderno, optimizado y gratuito para compartir tus conocimientos.
+1. En Settings → Pages selecciona **Source: GitHub Actions**.
+2. Haz push a `main` (o ejecuta el workflow manualmente en la pestaña Actions). El flujo corre `bun run build`, copia `index.html` como `404.html` para manejar rutas internas y sube la carpeta `dist/` como artefacto de Pages.
+3. Cuando el job **deploy** termine, la URL pública aparecerá en la sección Pages. Gracias al `base` de `vite.config.ts`, los assets se servirán desde `https://<usuario>.github.io/Preguntas-y-Respuestas/`.
+
+¡Listo! Cada cambio en `main` se publica con fallback para rutas internas de la SPA.
