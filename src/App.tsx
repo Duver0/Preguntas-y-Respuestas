@@ -6,13 +6,16 @@ import ProgressBar from "./components/ProgressBar";
 import QuestionCard from "./components/QuestionCard";
 import ScoreCard from "./components/ScoreCard";
 import SummaryModal from "./components/SummaryModal";
+import ThemeToggle from "./components/ThemeToggle";
 import { QUESTIONS } from "./data/questions";
 import { useHighscores } from "./hooks/useHighscores";
 import { useQuizEngine } from "./hooks/useQuizEngine";
+import { useTheme } from "./hooks/useTheme";
 
 const App = () => {
   const quiz = useQuizEngine(QUESTIONS, { rounds: 15, basePoints: 120, streakBonus: 20 });
   const { entries, addEntry, reset } = useHighscores();
+  const { theme, toggleTheme } = useTheme();
 
   const topFive = useMemo(() => entries.slice(0, 5), [entries]);
 
@@ -25,15 +28,18 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-900 transition-colors duration-300 dark:bg-gradient-to-b dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 dark:text-white">
+      <ThemeToggle theme={theme} onToggle={toggleTheme} />
       <div className="mx-auto max-w-6xl space-y-8 px-4 py-12 lg:space-y-12 lg:py-16">
         <header className="flex flex-col gap-3 text-center sm:text-left">
-          <p className="text-xs font-semibold uppercase tracking-[0.6em] text-brand-300">
+          <p className="text-xs font-semibold uppercase tracking-[0.6em] text-brand-700 dark:text-brand-300">
             Preguntas y Respuestas · React
           </p>
-          <h1 className="text-3xl font-black text-white sm:text-4xl">Juego interactivo moderno</h1>
-          <p className="text-slate-300">
-            Componentes reutilizables impulsados por Bun + Tailwind, listos para desplegar en GitHub Pages.
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white sm:text-4xl">
+            Juego interactivo
+          </h1>
+          <p className="text-slate-600 dark:text-slate-300">
+            Componentes reutilizables impulsados por Bun + Tailwind, listos para compartirse en la web.
           </p>
         </header>
 
@@ -64,14 +70,14 @@ const App = () => {
                     quiz.goNext();
                   }}
                   disabled={quiz.selectedOption === null}
-                  className="rounded-2xl bg-brand-500 px-6 py-3 font-semibold text-white transition hover:bg-brand-400 disabled:cursor-not-allowed disabled:bg-slate-700"
+                  className="rounded-2xl bg-brand-500 px-6 py-3 font-semibold text-white transition hover:bg-brand-400 disabled:cursor-not-allowed disabled:bg-slate-300 dark:disabled:bg-slate-700"
                 >
                   {actionLabel}
                 </button>
                 <button
                   type="button"
                   onClick={quiz.restart}
-                  className="rounded-2xl border border-white/10 px-6 py-3 font-semibold text-white transition hover:border-brand-300"
+                  className="rounded-2xl border border-slate-200 px-6 py-3 font-semibold text-slate-900 transition hover:border-brand-300 hover:text-brand-600 dark:border-white/10 dark:text-white dark:hover:text-brand-100"
                 >
                   Reiniciar ronda
                 </button>
